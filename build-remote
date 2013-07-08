@@ -29,7 +29,7 @@ opts() {
   PROJECT=community
   BRANCH=master
   BUILD_TYPE=quick
-  SOURCE=git@github.com:cfengine
+  SOURCE=git://github.com/cfengine
   BUILD_NUMBER=1
 
   while true; do
@@ -68,7 +68,7 @@ opts() {
     usage
     exit 1
   fi
-  
+
   REPOSITORY=$PROJECT-$BRANCH
   HOST=$1
 
@@ -92,10 +92,14 @@ checkout() {
     community-master)
       git clone $SOURCE/core build/core
       ;;
+    community-3.5.x)
+      git clone $SOURCE/core build/core
+      (cd build/core && git checkout 3.5.x) || false
+      ;;
     community-3.4.x)
       git clone $SOURCE/core build/core
       (cd build/core && git checkout 3.4.x) || false
-     ;;
+      ;;
     community-3.3.x)
       git clone $SOURCE/core build/core
       (cd build/core && git checkout -b 3.3.x remotes/origin/3.3.x || git checkout 3.3.x) || false
@@ -150,7 +154,9 @@ build() {
 	  remote_script produce-debug-symbols
 	  ;;
   esac
-  remote_script test
+  if [ "$PROJECT-$BRANCH" != "community-3.5.x" ]; then
+    remote_script test
+  fi
   remote_script package
   remote_script prepare-results
 
