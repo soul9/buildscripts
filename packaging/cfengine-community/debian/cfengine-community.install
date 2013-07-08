@@ -10,7 +10,6 @@
 /var/cfengine/bin/cf-serverd
 /var/cfengine/bin/tchmgr
 /var/cfengine/lib/lib*.so.*
-/var/cfengine/share/man
 /var/cfengine/share/doc
 /var/cfengine/share/CoreBase
 /var/cfengine/masterfiles
