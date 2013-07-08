@@ -68,7 +68,7 @@ case "$ARCH-${OS_FAMILY}" in
       debian-3.1)
         LIBVIRT=no;;
       *-*)
-        LIBVIRT=yes;;
+        LIBVIRT=no;;
     esac;;
   *-aix|*-*bsd|*-solaris|*-hpux)
     LIBVIRT=no;;
